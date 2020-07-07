@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarnStash", "YarnStash\YarnStash.csproj", "{5F36DF1C-9D74-473A-AAC0-E160183EBA04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F36DF1C-9D74-473A-AAC0-E160183EBA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F36DF1C-9D74-473A-AAC0-E160183EBA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F36DF1C-9D74-473A-AAC0-E160183EBA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F36DF1C-9D74-473A-AAC0-E160183EBA04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
