@@ -54,7 +54,7 @@ namespace YarnStash.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,yarnManufacturer,yarnName,yarnAmount,yarnColor,yarnSize")] YarnModel yarnModel)
+        public async Task<IActionResult> Create([Bind("id,Manufacturer,Name,Amount,Color,Size")] YarnModel yarnModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace YarnStash.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,yarnManufacturer,yarnName,yarnAmount,yarnColor,yarnSize")] YarnModel yarnModel)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Manufacturer,Name,Amount,Color,Size")] YarnModel yarnModel)
         {
             if (id != yarnModel.id)
             {
