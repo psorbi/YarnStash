@@ -1,7 +1,7 @@
 @model YarnStash.Models.YarnModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Create";
 }
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
+                <input asp-for="Amount" class="form-control" min="0" step="1"/>
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
+                <input asp-for="Size" class="form-control" min="0" step="1" max="7"/>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
