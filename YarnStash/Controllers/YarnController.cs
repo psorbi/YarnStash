@@ -20,9 +20,46 @@ namespace YarnStash.Controllers
         }
 
         // GET: Yarn
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Yarn.ToListAsync());
+            ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["AmountSortParm"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
+            ViewData["SizeSortParm"] = sortOrder == "Size" ? "size_desc" : "Size";
+
+            var yarns = from y in _context.Yarn
+                        select y;
+
+            switch (sortOrder)
+            {
+                case "manufacturer_desc":
+                    yarns = yarns.OrderByDescending(y => y.Manufacturer.ToLower());
+                    break;
+                case "Name":
+                    yarns = yarns.OrderBy(y => y.Name.ToLower());
+                    break;
+                case "name_desc":
+                    yarns = yarns.OrderByDescending(y => y.Name.ToLower());
+                    break;
+                case "Amount":
+                    yarns = yarns.OrderBy(y => y.Amount);
+                    break;
+                case "amount_desc":
+                    yarns = yarns.OrderByDescending(y => y.Amount);
+                    break;
+                case "Size":
+                    yarns = yarns.OrderBy(y => y.Size);
+                    break;
+                case "size_desc":
+                    yarns = yarns.OrderByDescending(y => y.Size);
+                    break;
+                default:
+                    yarns = yarns.OrderBy(y => y.Manufacturer.ToLower());
+                    break;
+
+            }
+
+            return View(await yarns.AsNoTracking().ToListAsync());
         }
 
         // GET: Yarn/Details/5

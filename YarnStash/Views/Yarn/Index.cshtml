@@ -19,20 +19,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ManufacturerSortParm"]">@Html.DisplayNameFor(model => model.Manufacturer)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+</th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AmountSortParm"]">@Html.DisplayNameFor(model => model.Amount)</a>
+</th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SizeSortParm"]">@Html.DisplayNameFor(model => model.Size)</a>
+</th>
             <th></th>
         </tr>
     </thead>
