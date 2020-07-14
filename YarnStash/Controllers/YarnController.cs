@@ -20,16 +20,27 @@ namespace YarnStash.Controllers
         }
 
         // GET: Yarn
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["AmountSortParm"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
             ViewData["SizeSortParm"] = sortOrder == "Size" ? "size_desc" : "Size";
+            ViewData["CurrentFilter"] = searchString;
 
             var yarns = from y in _context.Yarn
                         select y;
 
+            //search from box input
+            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                yarns = yarns.Where(y => y.Manufacturer.ToLower().Contains(searchString.ToLower())
+                    || y.Name.ToLower().Contains(searchString.ToLower()));
+            }
+
+            //sort table by column, default is manufacterer ascending
             switch (sortOrder)
             {
                 case "manufacturer_desc":
@@ -59,7 +70,8 @@ namespace YarnStash.Controllers
 
             }
 
-            return View(await yarns.AsNoTracking().ToListAsync());
+            var response = await yarns.AsNoTracking().ToListAsync();
+            return View(response);
         }
 
         // GET: Yarn/Details/5
