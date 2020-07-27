@@ -32,8 +32,6 @@ namespace YarnStash.Controllers
                         select y;
 
             //search from box input
-            
-
             if (!String.IsNullOrEmpty(searchString))
             {
                 yarns = yarns.Where(y => y.Manufacturer.ToLower().Contains(searchString.ToLower())
@@ -70,8 +68,7 @@ namespace YarnStash.Controllers
 
             }
 
-            var response = await yarns.AsNoTracking().ToListAsync();
-            return View(response);
+            return View(await yarns.AsNoTracking().ToListAsync());
         }
 
         // GET: Yarn/Details/5
