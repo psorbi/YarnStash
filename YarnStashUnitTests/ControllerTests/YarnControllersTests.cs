@@ -5,18 +5,18 @@ using YarnStash.Data;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YarnStashUnitTests.DataFixtures;
 
 namespace YarnStashUnitTests.ControllerTests
 {
-    public class YarnControllersTests
+    public class YarnControllersTests : IClassFixture<YarnSeedDataFixture>
     {
         private readonly YarnController _yarnController;
 
-        public YarnControllersTests()
+        public YarnControllersTests(YarnSeedDataFixture yarnSeed)
         {
-            var contextOptions = new DbContextOptionsBuilder<YarnContext>().UseInMemoryDatabase("inMemoryDatabase").Options;
-            var context = new YarnContext(contextOptions);
-            _yarnController = new YarnController(context);
+            //creating new yarn controller to test
+            _yarnController = new YarnController(yarnSeed.context);
         }
 
         [Fact]
@@ -29,6 +29,32 @@ namespace YarnStashUnitTests.ControllerTests
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Details_IDNotFound_ReturnNotFound()
+        {
+            //Arrange
+            int nonexistID = 3;
+
+            //Act
+            var result = await _yarnController.Details(nonexistID);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Details_validID_ReturnView()
+        {
+            //Arrange
+            int existingID = 2;
+
+            //Act
+            var result = await _yarnController.Details(existingID);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
         }
     }
 }
