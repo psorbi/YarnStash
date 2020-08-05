@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using YarnStash.Services;
+using YarnStash.Interfaces;
 
 namespace YarnStash
 {
@@ -27,6 +29,8 @@ namespace YarnStash
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ISearchServices, SearchServices>();
+
             services.AddControllersWithViews();
 
             services.AddDbContext<YarnContext>(options =>

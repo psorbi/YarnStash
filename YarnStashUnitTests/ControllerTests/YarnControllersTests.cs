@@ -6,21 +6,36 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YarnStashUnitTests.DataFixtures;
+using System.Linq;
+using YarnStash.Models;
+using YarnStash.Interfaces;
 
 namespace YarnStashUnitTests.ControllerTests
 {
     public class YarnControllersTests : IClassFixture<YarnSeedDataFixture>
     {
         private readonly YarnController _yarnController;
+        private readonly Mock<ISearchServices> _mockSearchServices;
 
         public YarnControllersTests(YarnSeedDataFixture yarnSeed)
         {
+            //create the _mockSearchServies
+            _mockSearchServices = new Mock<ISearchServices>();
+
             //creating new yarn controller to test
-            _yarnController = new YarnController(yarnSeed.context);
+            _yarnController = new YarnController(yarnSeed.context, _mockSearchServices.Object);
+
         }
 
+
+        //-----Index-----
+
+        
+
+        //-----Details-----
+
         [Fact]
-        public async void Details_NullID_ReturnNoContent()
+        public async void Details_NullID_ReturnBadRequest()
         {
             //Arrange
 
@@ -28,7 +43,7 @@ namespace YarnStashUnitTests.ControllerTests
             var result = await _yarnController.Details(null);
 
             //Assert
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<BadRequestResult>(result);
         }
 
         [Fact]
@@ -56,5 +71,88 @@ namespace YarnStashUnitTests.ControllerTests
             //Assert
             Assert.IsType<ViewResult>(result);
         }
+
+
+        //-----Create-----
+
+
+
+        //-----Edit-----
+
+        [Fact]
+        public async void Edit_NullID_ReturnBadRequest()
+        {
+            //Act
+            var result = await _yarnController.Edit(null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(result);
+        }
+
+        [Fact]
+        public async void Edit_IDNotFound_ReturnNotFound()
+        {
+            //Arrange
+            int nonexistID = 3;
+
+            //Act
+            var result = await _yarnController.Edit(nonexistID);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Edit_ValidID_ReturnView()
+        {
+            //Arrange
+            int existingID = 2;
+
+            //Act
+            var result = await _yarnController.Edit(existingID);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        //-----Delete----
+
+        [Fact]
+        public async void Delete_NullID_ReturnBadRequest()
+        {
+            //Act
+            var result = await _yarnController.Delete(null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(result);
+        }
+
+        [Fact]
+        public async void Delete_IDNotFound_ReturnNotFound()
+        {
+            //Arrange
+            int nonexistID = 3;
+
+            //Act
+            var result = await _yarnController.Delete(nonexistID);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Delete_ValidID_ReturnView()
+        {
+            //Arrange
+            int existingID = 2;
+
+            //Act
+            var result = await _yarnController.Delete(existingID);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+
     }
 }

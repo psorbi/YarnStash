@@ -6,17 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using YarnStash.Data;
+using YarnStash.Interfaces;
 using YarnStash.Models;
+using YarnStash.Services;
 
 namespace YarnStash.Controllers
 {
     public class YarnController : Controller
     {
         private readonly YarnContext _context;
+        private readonly ISearchServices _searchServices;
 
-        public YarnController(YarnContext context)
+        public YarnController(YarnContext context, ISearchServices searchServices)
         {
             _context = context;
+            _searchServices = searchServices;
         }
 
         // GET: Yarn
@@ -34,39 +38,11 @@ namespace YarnStash.Controllers
             //search from box input
             if (!String.IsNullOrEmpty(searchString))
             {
-                yarns = yarns.Where(y => y.Manufacturer.ToLower().Contains(searchString.ToLower())
-                    || y.Name.ToLower().Contains(searchString.ToLower()));
+                yarns = _searchServices.SearchByInput(yarns, searchString);
             }
 
             //sort table by column, default is manufacterer ascending
-            switch (sortOrder)
-            {
-                case "manufacturer_desc":
-                    yarns = yarns.OrderByDescending(y => y.Manufacturer.ToLower());
-                    break;
-                case "Name":
-                    yarns = yarns.OrderBy(y => y.Name.ToLower());
-                    break;
-                case "name_desc":
-                    yarns = yarns.OrderByDescending(y => y.Name.ToLower());
-                    break;
-                case "Amount":
-                    yarns = yarns.OrderBy(y => y.Amount);
-                    break;
-                case "amount_desc":
-                    yarns = yarns.OrderByDescending(y => y.Amount);
-                    break;
-                case "Size":
-                    yarns = yarns.OrderBy(y => y.Size);
-                    break;
-                case "size_desc":
-                    yarns = yarns.OrderByDescending(y => y.Size);
-                    break;
-                default:
-                    yarns = yarns.OrderBy(y => y.Manufacturer.ToLower());
-                    break;
-
-            }
+            yarns = _searchServices.SortYarn(yarns, sortOrder);
 
             return View(await yarns.AsNoTracking().ToListAsync());
         }
@@ -76,7 +52,7 @@ namespace YarnStash.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var yarnModel = await _context.Yarn
@@ -116,7 +92,7 @@ namespace YarnStash.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var yarnModel = await _context.Yarn.FindAsync(id);
@@ -167,7 +143,7 @@ namespace YarnStash.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var yarnModel = await _context.Yarn

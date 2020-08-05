@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="ControllerTests\" />
     <Folder Include="Data Fixtures\" />
+    <Folder Include="ServicesTests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YarnStash\YarnStash.csproj" />
