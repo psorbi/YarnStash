@@ -39,13 +39,23 @@ namespace YarnStash.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 yarns = _searchServices.SearchByInput(yarns, searchString);
+
+                if (yarns.Count() == 0)
+                {
+                    ViewData["SearchResults"] = "_NotFoundView";
+                    return View();
+                }
             }
 
             //sort table by column, default is manufacterer ascending
             yarns = _searchServices.SortYarn(yarns, sortOrder);
 
+            ViewData["SearchResults"] = "_YarnDisplayTable";
+
             return View(await yarns.AsNoTracking().ToListAsync());
         }
+
+        
 
         // GET: Yarn/Details/5
         public async Task<IActionResult> Details(int? id)

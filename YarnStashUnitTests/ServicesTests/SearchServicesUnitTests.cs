@@ -115,13 +115,26 @@ namespace YarnStashUnitTests.ServicesTests
         }
 
         [Fact]
-        public void SortYarn_SortOrderManAsc_ReturnSortList()
+        public void SortYarn_SortOrderDefaultManAsc_ReturnSortList()
         {
             //Arrange
             var expected = _yarns.OrderBy(y => y.Manufacturer);
 
             //Act
-            var result = _searchServices.SortYarn(_yarns, null);
+            var result = _searchServices.SortYarn(_yarns, "");
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void SortYarn_SortOrderInvalidInput_ReturnDefaultSortList()
+        {
+            //Arrange
+            var expected = _yarns.OrderBy(y => y.Manufacturer);
+
+            //Act
+            var result = _searchServices.SortYarn(_yarns, "sdfaw");
 
             //Assert
             Assert.Equal(expected, result);

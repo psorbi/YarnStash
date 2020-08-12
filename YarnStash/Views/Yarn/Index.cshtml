@@ -26,53 +26,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ManufacturerSortParm"]">@Html.DisplayNameFor(model => model.Manufacturer)</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
-</th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["AmountSortParm"]">Amount in Yards</a>
-</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["SizeSortParm"]">@Html.DisplayNameFor(model => model.Size)</a>
-</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+@await Html.PartialAsync(ViewData["SearchResults"] as string)
+
 </body>
 </html>
