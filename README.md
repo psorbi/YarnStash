@@ -1,7 +1,9 @@
 # YarnStash
 I'm creating my own website to organize my knitting hobby
 
-currently - creating yarn database and frontend design
+Currently - creating the yarn database
 
-eventually the plan is to also have a database of patterns and be able to compare the patterns to the available yarn to see possible pairings
-other add ons include users with passwords and an archive of completed patterns 
+The plan is to also create a database of patterns and be able to compare the patterns to the available yarn to see possible pairings.
+Other plans involve adding users with passwords and an archive of completed projects.
+
+Trello board - https://trello.com/b/N9pwRmwO/yarnstash
