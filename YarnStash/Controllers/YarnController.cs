@@ -24,12 +24,22 @@ namespace YarnStash.Controllers
         }
 
         // GET: Yarn
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index()
         {
-            ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["AmountSortParm"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
-            ViewData["SizeSortParm"] = sortOrder == "Size" ? "size_desc" : "Size";
+            var yarns = from y in _context.Yarn
+                        select y;
+
+            //default sort is manufacterer ascending
+            var defaultSort = "";
+            yarns = _searchServices.SortYarn(yarns, defaultSort);
+
+            ViewData["SearchResults"] = "_YarnDisplayTable";
+
+            return View(await yarns.AsNoTracking().ToListAsync());
+        }
+
+        public async Task<IActionResult> Search(string searchString)
+        {
             ViewData["CurrentFilter"] = searchString;
 
             var yarns = from y in _context.Yarn
@@ -43,19 +53,14 @@ namespace YarnStash.Controllers
                 if (yarns.Count() == 0)
                 {
                     ViewData["SearchResults"] = "_NotFoundView";
-                    return View();
+                    return View("Index");
                 }
             }
 
-            //sort table by column, default is manufacterer ascending
-            yarns = _searchServices.SortYarn(yarns, sortOrder);
-
             ViewData["SearchResults"] = "_YarnDisplayTable";
 
-            return View(await yarns.AsNoTracking().ToListAsync());
+            return View("Index", await yarns.AsNoTracking().ToListAsync());
         }
-
-        
 
         // GET: Yarn/Details/5
         public async Task<IActionResult> Details(int? id)

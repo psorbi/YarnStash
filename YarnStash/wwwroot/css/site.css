@@ -12,7 +12,7 @@ a {
   color: #0366d6;
 }
 
-/*trying to chnage navbar bg color*/
+/*trying to change navbar bg color*/
 .navbar-custom{
     background-color: #dff7f7;
 }
@@ -22,6 +22,11 @@ a {
   color: #fff;
   background-color: #18acaa;
   border-color: #149997;
+}
+
+.clickable {
+    color: #0366d6;
+    background-color: white;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

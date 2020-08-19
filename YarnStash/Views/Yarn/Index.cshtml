@@ -13,11 +13,11 @@
 </head>
 <body>
 
-<form asp-action="Index" method="get">
+<form asp-action="Search" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by Brand or Name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-primary" />
+            Find by Brand or Name: <input type="text" name="searchString" value="@ViewData["currentFilter"]" />
+            <input id="SearchButton" type="submit" value="Search" class="btn btn-primary"/>
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
@@ -26,8 +26,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
+<div>
 @await Html.PartialAsync(ViewData["SearchResults"] as string)
-
+</div>
+<script src="~/js/YarnTable.js"></script>
 </body>
 </html>
