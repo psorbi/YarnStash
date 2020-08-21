@@ -7,12 +7,18 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
 }
 
-/*trying to change navbar bg color*/
+/*change navbar bg color*/
 .navbar-custom{
     background-color: #dff7f7;
 }
@@ -24,16 +30,31 @@ a {
   border-color: #149997;
 }
 
-.clickable {
-    color: #0366d6;
-    background-color: white;
+/*Table styling---------------------*/
+th, td {
+   text-indent: 5%;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.sortable,
+.sorting_asc,
+.sorting_desc {
+    color: black;
+    cursor: pointer;
 }
+
+.sortable{
+    background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==) no-repeat left;
+}
+
+.sorting_asc {
+    background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIRnC2nKLnT4or00Puy3rx7VQAAOw==) no-repeat left;
+}
+
+.sorting_desc {
+    background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIPnI+py+0/hJzz0IruwjsVADs=) no-repeat left;
+}
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */

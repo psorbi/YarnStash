@@ -1,0 +1,54 @@
+﻿@model IEnumerable<YarnStash.Models.YarnModel>
+
+<body>
+    <table id="yarnTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th onclick="ColumnSortWords(0)" class="sorting_asc">
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </th>
+                <th onclick="ColumnSortWords(1)" class="sortable">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th onclick="ColumnSortInt(2)" class="sortable">
+                    Amount in Yards
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th onclick="ColumnSortInt(4)" class="sortable">
+                    @Html.DisplayNameFor(model => model.Size)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manufacturer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/js/YarnTable.js"></script>
+</body>
