@@ -30,7 +30,70 @@ namespace YarnStashUnitTests.ControllerTests
 
         //-----Index-----
 
+        [Fact]
+        public void Index_GoodCall_ReturnView()
+        {
+            //Act
+            var result = _yarnController.Index();
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
         
+        //-----Search-----
+
+        [Fact]
+        public async void Search_MatchFound_ReturnView()
+        {
+            //Arrange
+            string searchString = "Berroco";
+
+            //Act
+            var result = await _yarnController.Search(searchString);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void Search_NoMatchFound_ReturnView()
+        {
+            //Arrange
+            string searchString = "Lion";
+
+            //Act
+            var result = await _yarnController.Search(searchString);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void Search_EmptySearch_ReturnView()
+        {
+            //Arrange
+            string searchString = "";
+
+            //Act
+            var result = await _yarnController.Search(searchString);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void Search_NullSearch_ReturnBadRequest()
+        {
+            //Arrange
+            string searchString = null;
+
+            //Act
+            var result = await _yarnController.Search(searchString);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(result);
+        }
+
 
         //-----Details-----
 

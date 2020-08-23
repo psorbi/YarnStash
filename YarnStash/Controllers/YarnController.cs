@@ -24,7 +24,7 @@ namespace YarnStash.Controllers
         }
 
         // GET: Yarn
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var yarns = from y in _context.Yarn
                         select y;
@@ -35,19 +35,24 @@ namespace YarnStash.Controllers
 
             ViewData["SearchResults"] = "_YarnDisplayTable";
 
-            return View(await yarns.AsNoTracking().ToListAsync());
+            return View( yarns.AsNoTracking().ToList());
         }
 
         public async Task<IActionResult> Search(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
-
+            
             var yarns = from y in _context.Yarn
                         select y;
 
+            //default sort is manufacterer ascending
+            var defaultSort = "";
+            yarns = _searchServices.SortYarn(yarns, defaultSort);
+
             //search from box input
-            if (!String.IsNullOrEmpty(searchString))
+            if (searchString != null)
             {
+                searchString = searchString.Trim();
                 yarns = _searchServices.SearchByInput(yarns, searchString);
 
                 if (yarns.Count() == 0)
@@ -55,6 +60,10 @@ namespace YarnStash.Controllers
                     ViewData["SearchResults"] = "_NotFoundView";
                     return View("Index");
                 }
+            }
+            else if (searchString == null)
+            {
+                return BadRequest();
             }
 
             ViewData["SearchResults"] = "_YarnDisplayTable";

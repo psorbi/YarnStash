@@ -16,8 +16,8 @@ namespace YarnStashUnitTests.DataFixtures
             context = new YarnContext(contextOptions);
 
             //seeding test database
-            context.Yarn.Add(new YarnStash.Models.YarnModel { id = 1, Manufacturer = "Man. 1", Name = "Name 1" });
-            context.Yarn.Add(new YarnStash.Models.YarnModel { id = 2, Manufacturer = "Man. 2", Name = "Name 2" });
+            context.Yarn.Add(new YarnStash.Models.YarnModel { id = 1, Manufacturer = "Berroco", Name = "Remix Light" });
+            context.Yarn.Add(new YarnStash.Models.YarnModel { id = 2, Manufacturer = "Lily", Name = "Sugar 'n Cream" });
             context.SaveChanges();
 
         }
