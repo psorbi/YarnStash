@@ -138,7 +138,36 @@ namespace YarnStashUnitTests.ControllerTests
 
         //-----Create-----
 
+        [Fact]
+        public async void Create_ValidModel_ReturnRedirectToAction()
+        {
+            //Arrange
+            YarnModel testModel = new YarnModel();
+            testModel.Manufacturer = "Test Yarn";
+            testModel.Name = "Yarny";
+            testModel.Amount = 100;
+            testModel.Color = "black";
+            testModel.Size = 3;
 
+            //Act
+            var result = await _yarnController.Create(testModel);
+
+            //Assert
+            Assert.IsType<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public async void Create_InvalidModel_ReturnView()
+        {
+            //Arrange
+            YarnModel testModel = null;
+            
+            //Act
+            var result = await _yarnController.Create(testModel);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
 
         //-----Edit-----
 
@@ -194,7 +223,7 @@ namespace YarnStashUnitTests.ControllerTests
         public async void Delete_IDNotFound_ReturnNotFound()
         {
             //Arrange
-            int nonexistID = 3;
+            int nonexistID = 100;
 
             //Act
             var result = await _yarnController.Delete(nonexistID);

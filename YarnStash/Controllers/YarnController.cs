@@ -95,19 +95,46 @@ namespace YarnStash.Controllers
             return View();
         }
 
+        private bool ValidateYarnModel(YarnModel yarnModel)
+        {
+            bool isValid = true;
+
+            if (yarnModel == null)
+            {
+                isValid = false;
+            }
+            else if (string.IsNullOrEmpty(yarnModel.Name))
+            {
+                isValid = false;
+            }
+            else if (yarnModel.Amount < 0)
+            {
+                isValid = false;
+            }
+            else if (string.IsNullOrEmpty(yarnModel.Color))
+            {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
         // POST: Yarn/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Manufacturer,Name,Amount,Color,Size")] YarnModel yarnModel)
+        public async Task<IActionResult> Create([FromForm] YarnModel yarnModel)
         {
-            if (ModelState.IsValid)
+            if (ValidateYarnModel(yarnModel))
             {
                 _context.Add(yarnModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+                
+
             return View(yarnModel);
         }
 
