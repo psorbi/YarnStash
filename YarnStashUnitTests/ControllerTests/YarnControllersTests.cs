@@ -16,6 +16,7 @@ namespace YarnStashUnitTests.ControllerTests
     {
         private readonly YarnController _yarnController;
         private readonly Mock<ISearchServices> _mockSearchServices;
+        private readonly YarnContext _yarnContext;
 
         public YarnControllersTests(YarnSeedDataFixture yarnSeed)
         {
@@ -24,6 +25,8 @@ namespace YarnStashUnitTests.ControllerTests
 
             //creating new yarn controller to test
             _yarnController = new YarnController(yarnSeed.context, _mockSearchServices.Object);
+
+            _yarnContext = yarnSeed.context;
 
         }
 
@@ -169,7 +172,7 @@ namespace YarnStashUnitTests.ControllerTests
             Assert.IsType<ViewResult>(result);
         }
 
-        //-----Edit-----
+        //----- Edit with one arguement -----
 
         [Fact]
         public async void Edit_NullID_ReturnBadRequest()
@@ -207,6 +210,68 @@ namespace YarnStashUnitTests.ControllerTests
             Assert.IsType<ViewResult>(result);
         }
 
+        //----- Edit with 2 arguements -----
+        [Fact]
+        public async void Edit_WrongID_ReturnNotFound()
+        {
+            //Arrange
+            YarnModel testModel = new YarnModel();
+            testModel.id = 35;
+            int wrongID = 101;
+
+            //Act
+            var result = await _yarnController.Edit(wrongID, testModel);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Edit_NonexistantYarnModel_ReturnNotFound()
+        {
+            //Arrange
+            YarnModel testModel = new YarnModel();
+            int nonExistID = 102;
+
+            //Act
+            var result = await _yarnController.Edit(nonExistID, testModel);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void Edit_ValidYarnModel_ReturnRedirectToAction()
+        {
+            //Arrange
+            YarnModel testModel = await _yarnContext.Yarn.FirstOrDefaultAsync(m => m.id == 1);
+            int goodID = 1;
+
+            //Act
+            var result = await _yarnController.Edit(goodID, testModel);
+
+            //Assert
+            Assert.IsType<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public async void Edit_InvalidModel_ReturnView()
+        {
+            //Arrange
+            YarnModel testModel = new YarnModel();
+            testModel.id = 66;
+            testModel.Manufacturer = null;
+            int validID = 66;
+
+            //Act
+            var result = await _yarnController.Edit(validID, testModel);
+
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+        
+
+
         //-----Delete----
 
         [Fact]
@@ -243,6 +308,28 @@ namespace YarnStashUnitTests.ControllerTests
 
             //Assert
             Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void DeleteConfirmed_ValidID_ReturnRedirectToAction()
+        {
+            //Arrange
+            YarnModel testModel = new YarnModel();
+            testModel.Manufacturer = "All Yarn";
+            testModel.Name = "Softy";
+            testModel.Amount = 200;
+            testModel.Color = "yellow";
+            testModel.Size = 2;
+            testModel.id = 20;
+            _yarnContext.Yarn.Add(testModel);
+            int validID = 20;
+
+            //Act
+            var result = await _yarnController.DeleteConfirmed(validID);
+
+            //Assert
+            Assert.IsType<RedirectToActionResult>(result);
+
         }
 
 
