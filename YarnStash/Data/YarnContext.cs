@@ -12,7 +12,7 @@ namespace YarnStash.Data
 
         public DbSet<YarnModel> Yarn { get; set; } //table of yarn model - data
 
-        /*
+        /* ------a personal reminder of what {get; set;} is doing automatically -----
         private DbSet<YarnModel> yarn;
         public DbSet<YarnModel> GetYarnModel()
         {

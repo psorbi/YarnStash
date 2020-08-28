@@ -8,6 +8,7 @@
     <Folder Include="Data\" />
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="wwwroot\Content\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
@@ -24,8 +25,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\YarnTable.js" />
+    <Content Remove="wwwroot\Content\Images\basketOfYarn.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\YarnTable.js" />
+    <None Include="wwwroot\Content\Images\basketOfYarn.jpg" />
   </ItemGroup>
 </Project>
