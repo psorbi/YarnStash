@@ -1,4 +1,5 @@
 @model YarnStash.Models.YarnModel
+@using YarnStash.Models
 
 @{
     ViewData["Title"] = "Create";
@@ -40,8 +41,8 @@
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" min="0" step="1" max="7"/>
+                <label asp-for="Size" class="control-label"></label><br />
+                <select asp-for="Size" asp-items="Html.GetEnumSelectList<SizeEnum>()" class="form-control"></select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">

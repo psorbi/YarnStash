@@ -4,6 +4,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace YarnStash.Models
 {
+    public enum SizeEnum
+    {
+        Thread,
+        Cobweb,
+        Lace,
+        [Display(Name ="Light Fingering")]
+        LightFingering,
+        Fingering,
+        Sport,
+        DK,
+        Worsetd,
+        Aran,
+        Bulky,
+        [Display(Name = "Super Bulky")]
+        SuperBulky,
+        Jumbo
+    }
+
     public class YarnModel
     {
         public int id { get; set; } //required by database for primary key
@@ -15,6 +33,7 @@ namespace YarnStash.Models
         public int Amount { get; set; }
         [Required]
         public string Color { get; set; }
-        public int? Size { get; set; }
+        [DisplayName("Weight")]
+        public SizeEnum Size { get; set; }
     }
 }

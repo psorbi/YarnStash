@@ -8,7 +8,8 @@ function ColumnSortInt(n) {
     sortRowsInt(n);
 }
 
-//TO DO: optimize sorts
+
+//TO DO: optimize sorts for less looping
 
 function sortRowsWords(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir;

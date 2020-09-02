@@ -150,7 +150,7 @@ namespace YarnStashUnitTests.ControllerTests
             testModel.Name = "Yarny";
             testModel.Amount = 100;
             testModel.Color = "black";
-            testModel.Size = 3;
+            testModel.Size = SizeEnum.Aran;
 
             //Act
             var result = await _yarnController.Create(testModel);
@@ -319,7 +319,7 @@ namespace YarnStashUnitTests.ControllerTests
             testModel.Name = "Softy";
             testModel.Amount = 200;
             testModel.Color = "yellow";
-            testModel.Size = 2;
+            testModel.Size = SizeEnum.Lace;
             testModel.id = 20;
             _yarnContext.Yarn.Add(testModel);
             int validID = 20;

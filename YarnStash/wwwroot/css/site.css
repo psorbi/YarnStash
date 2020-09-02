@@ -28,8 +28,8 @@ a {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    opacity:90%;
 }
+    
 
 /*the color of a basic button ex. 'create' */
 .btn-primary {
@@ -61,7 +61,6 @@ th, td {
 .sorting_desc {
     background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIPnI+py+0/hJzz0IruwjsVADs=) no-repeat left;
 }
-
 
 
 /* Sticky footer styles
