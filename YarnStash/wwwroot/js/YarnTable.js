@@ -9,6 +9,45 @@ function ColumnSortInt(n) {
     flipArrow(n);
 }
 
+function sortByColumnText2(n) {
+    var rows, switching, i, x, y, shouldSwitch;
+    var table = document.getElementById("yarnTable");
+    var headers = table.getElementsByTagName("th");
+
+    switching = true;
+
+    // if class is sortable sort direction is asc
+
+    if (headers[n].className.match(/(?:^|\s)sortable(?!\S)/)) {
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            //start at i = 1 to skip the header
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[n];
+                y = rows[i + 1].getElementsByTagName("td")[n];
+
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+    else {
+        table.rows.reverse();
+    }
+}
+
+
 function sortByColumnText(n) {
     var rows, switching, i, x, y, shouldSwitch;
     var table = document.getElementById("yarnTable");
@@ -86,7 +125,7 @@ function sortByColumnInt(n) {
             switching = false;
             rows = table.rows;
 
-            for (i = 1; i < (row.length - 1); i++) {
+            for (i = 1; i < (rows.length - 1); i++) {
                 shouldSwitch = false
 
                 x = rows[i].getElementsByTagName("TD")[n];
