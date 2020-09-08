@@ -14,7 +14,7 @@ namespace YarnStash.Models
         Fingering,
         Sport,
         DK,
-        Worsetd,
+        Worsted,
         Aran,
         Bulky,
         [Display(Name = "Super Bulky")]
