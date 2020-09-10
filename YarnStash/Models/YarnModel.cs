@@ -9,7 +9,7 @@ namespace YarnStash.Models
         Thread,
         Cobweb,
         Lace,
-        [Display(Name ="Light Fingering")]
+        [Display(Name = "Light Fingering")]
         LightFingering,
         Fingering,
         Sport,

@@ -12,6 +12,8 @@ namespace YarnStash.Data
 
         public DbSet<YarnModel> Yarn { get; set; } //table of yarn model - data
 
+        public DbSet<PatternModel> Pattern { get; set; }
+
         /* ------a personal reminder of what {get; set;} is doing automatically -----
         private DbSet<YarnModel> yarn;
         public DbSet<YarnModel> GetYarnModel()
