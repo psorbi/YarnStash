@@ -1,0 +1,60 @@
+﻿@model IEnumerable<YarnStash.Models.PatternModel>
+
+<body>
+    <table id="patternTable" class="table table-striped">
+        <thread>
+            <tr>
+                <th onclick="ColumnSortWords(0)" class="sorting_asc">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th onclick="ColumnSortWords(1)" class="sortable">
+                    @Html.DisplayNameFor(model => model.Designer)
+                </th>
+                <th onclick="ColumnSortWords(2)" class="sortable">
+                    @Html.DisplayNameFor(model => model.Size)
+                </th>
+                <th onclick="ColumnSortInt(3)" class="sortable">
+                    Amount (Yards)
+                </th>
+                <th onclick="ColumnSortInt(4)" class="sortable">
+                    @Html.DisplayNameFor(model => model.NeedleSize)
+                </th>
+                <th onclick="ColumnSortWords(5)" class="sortable">
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th></th>
+            </tr>
+        </thread>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Designer)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NeedleSize)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/js/YarnTable.js"></script>
+</body>

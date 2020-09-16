@@ -6,6 +6,8 @@ namespace YarnStash.Interfaces
 {
     public interface ISearchServices
     {
+        IQueryable<PatternModel> SortPattern(IQueryable<PatternModel> patternModels, string sortOrder);
+        public IQueryable<PatternModel> SearchByInput(IQueryable<PatternModel> patternModels, string searchString);
         IQueryable<YarnModel> SortYarn(IQueryable<YarnModel> yarnModels, string sortOrder);
         IQueryable<YarnModel> SearchByInput(IQueryable<YarnModel> yarnModels, string searchString);
     }

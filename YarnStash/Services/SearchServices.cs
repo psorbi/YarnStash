@@ -11,6 +11,23 @@ namespace YarnStash.Services
         public SearchServices()
         {
         }
+        public IQueryable<PatternModel> SortPattern(IQueryable<PatternModel> patternModel, string sortOrder)
+        {
+            IQueryable<PatternModel> patterns;
+            patterns = patternModel.OrderBy(p => p.Name.ToLower());
+            return patterns;
+        }
+
+        //TO DO: update search method for more accurate results
+        public IQueryable<PatternModel> SearchByInput(IQueryable<PatternModel> patternModels, string searchString)
+        {
+            IQueryable<PatternModel> patterns;
+
+            patterns = patternModels.Where(y => y.Designer.ToLower().Contains(searchString.ToLower())
+                    || y.Name.ToLower().Contains(searchString.ToLower()));
+
+            return patterns;
+        }
 
         public IQueryable<YarnModel> SortYarn(IQueryable<YarnModel> yarnModels, string sortOrder)
         {

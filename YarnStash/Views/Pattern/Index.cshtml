@@ -1,0 +1,35 @@
+﻿@model IEnumerable<YarnStash.Models.PatternModel>
+
+@{
+    ViewData["Title"] = "Pattern Library";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <form asp-action="Search" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by Designer or Pattern Name: <input type="text" name="searchString" value="@ViewData["currentFilter"]" />
+                <input id="SearchButton" type="submit" value="Search" class="btn btn-primary" />
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+
+    <p>
+        <!-- <a asp-action="Create">Create New</a>-->
+    </p>
+    <div>
+        @await Html.PartialAsync(ViewData["SearchResults"] as string)
+    </div>
+    <script src="~/js/YarnTable.js"></script>
+</body>
+</html>

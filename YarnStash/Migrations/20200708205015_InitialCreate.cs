@@ -13,9 +13,9 @@ namespace YarnStash.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Manufacturer = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Amount = table.Column<int>(nullable: false),
-                    Color = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: false),
                     Size = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
