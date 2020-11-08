@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace YarnStash.Models
 {
-    
     public enum TypeEnum
     {
         Hat,
@@ -30,6 +29,7 @@ namespace YarnStash.Models
         public SizeEnum Size { get; set; }
         [Required]
         public int Amount { get; set; }
+        [DisplayName("Needle Size")]
         public int NeedleSize { get; set; }
         public TypeEnum Type { get; set; }
 
