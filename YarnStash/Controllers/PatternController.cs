@@ -62,10 +62,12 @@ namespace YarnStash.Controllers
             }
             else if (searchString == null)
             {
-                return BadRequest();
+                ViewData["SearchResults"] = "_PatternDisplayTable";
+
+                return View("Index", await patterns.AsNoTracking().ToListAsync());
             }
 
-            ViewData["SearhResults"] = "_PatternDisplayTable";
+            ViewData["SearchResults"] = "_PatternDisplayTable";
 
             return View("Index", await patterns.AsNoTracking().ToListAsync());
         }

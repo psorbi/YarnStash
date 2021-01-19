@@ -63,7 +63,9 @@ namespace YarnStash.Controllers
             }
             else if (searchString == null)
             {
-                return BadRequest();
+                ViewData["SearchResults"] = "_YarnDisplayTable";
+
+                return View("Index", await yarns.AsNoTracking().ToListAsync());
             }
 
             ViewData["SearchResults"] = "_YarnDisplayTable";
